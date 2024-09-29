@@ -30,11 +30,20 @@ export const TodoContextProvider = ({ children }) => {
         setTodos(clone_todos);
     } 
 
+    const destroyTodo = (id) => {
+        const cloned_todos = [...todos];
+        const itemIndex = cloned_todos.findIndex((todo) => todo.id === id);
+        //console.log(itemIndex);
+        cloned_todos.splice(itemIndex,1);
+        setTodos(cloned_todos);
+    }
+
     const values = {
         todos,
         setTodos,
         addTodo,
-        changeTodo
+        changeTodo,
+        destroyTodo
     }
 
     return (
