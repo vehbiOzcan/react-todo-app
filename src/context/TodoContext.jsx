@@ -4,6 +4,7 @@ import { v4 as uuidv4 } from 'uuid';
 const TodoContext = createContext();
 
 export const TodoContextProvider = ({ children }) => {
+    const [filter, setFilter] = useState("all");
     const [todos, setTodos] = useState([{
         id: 1,
         text: "Learn React",
@@ -38,12 +39,21 @@ export const TodoContextProvider = ({ children }) => {
         setTodos(cloned_todos);
     }
 
+    const clearTodos = () => {
+        const clone_todos = [...todos];
+		const new_todos = clone_todos.filter((todo) => !todo.completed);
+		setTodos(new_todos)
+    }
+
     const values = {
         todos,
         setTodos,
         addTodo,
         changeTodo,
-        destroyTodo
+        destroyTodo,
+        clearTodos,
+        filter,
+        setFilter
     }
 
     return (
