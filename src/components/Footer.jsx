@@ -4,8 +4,7 @@ function Footer() {
     return (
         <footer className="info">
             <p>Click to edit a todo</p>
-            <p>Created by <a href="https://d12n.me/">Dmitry Sharabin</a></p>
-            <p>Part of <a href="http://todomvc.com">TodoMVC</a></p>
+            <p><a href="https://gelecegiyazanlar.turkcell.com.tr/konu/egitim/react-301/do-uygulamasi">Turkcell Geleceği Yazanlar </a></p>
         </footer>
     )
 }

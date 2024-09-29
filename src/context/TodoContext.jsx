@@ -1,21 +1,27 @@
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 import { v4 as uuidv4 } from 'uuid';
 
 const TodoContext = createContext();
 
 export const TodoContextProvider = ({ children }) => {
-    const [filter, setFilter] = useState("all");
-    const [todos, setTodos] = useState([{
-        id: 1,
+    const default_todos = [{
+        id: uuidv4(),
         text: "Learn React",
         completed: true
     },
     {
-        id: 2,
+        id: uuidv4(),
         text: "Learn Spring Boot",
         completed: false
     }
-    ])
+    ]
+    const local_todos = JSON.parse(localStorage.getItem("todos")) || default_todos;
+    const [filter, setFilter] = useState("all");
+    const [todos, setTodos] = useState(local_todos)
+
+    useEffect(() => {
+        localStorage.setItem("todos",JSON.stringify(todos));
+    },[todos]); 
 
     const addTodo = (text) => {
         setTodos((prev) => [...prev,{id:uuidv4(),completed:false,text:text}])
